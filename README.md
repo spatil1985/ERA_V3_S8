@@ -63,11 +63,14 @@ Using Albumentations library with the following transforms:
 
 ## Sample Images
 
-### Before Augmentation
-![Before Augmentation](sample_images/cifar10_grid_before_augmentation.png)
+### Sample Images
 
-### After Augmentation
-![After Augmentation](sample_images/cifar10_grid_after_augmentation.png)
+#### Before Augmentation
+![Before Augmentation](cifar10_grid_before_augmentation.png)
+
+#### After Augmentation
+![After Augmentation](cifar10_grid_after_augmentation.png)
+
 
 ## Training Summary 
 | Metric           | Value     |

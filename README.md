@@ -1,35 +1,6 @@
 # CIFAR10 Image Classification
-
-## Model Architecture (C1C2C3C40)
-
-The model follows a C1C2C3C40 architecture with the following components:
-
-1. **C1 (Initial Block)**
-    - Conv2d(3, 24, k=3, p=1)
-    - BatchNorm2d + ReLU + Dropout(0.03)
-    - RF: 3x3
-
-2. **C2 (Depthwise Separable Block)**
-    - DepthwiseSeparableConv(24, 48, k=3, s=2)
-    - BatchNorm2d + ReLU + Dropout(0.03)
-    - RF: 7x7
-
-3. **C3 (Dilated Conv Block)**
-    - Conv2d(48, 96, k=3, d=2, p=2)
-    - BatchNorm2d + ReLU + Dropout(0.03)
-    - Conv2d(96, 96, k=3, s=2, p=1)
-    - BatchNorm2d + ReLU + Dropout(0.03)
-    - RF: 15x15
-
-4. **C4 (Strided Conv Block)**
-    - Conv2d(96, 128, k=3, s=2, p=1)
-    - BatchNorm2d + ReLU + Dropout(0.03)
-    - RF: 45x45
-
-5. **Output (0)**
-    - Global Average Pooling
-    - Conv2d(128, 10, k=1)
-    - Log Softmax
+- Conv2d(128, 10, k=1)
+- Log Softmax
 
 ### Key Features
 - No MaxPooling (replaced with strided convolutions)
@@ -70,18 +41,35 @@ Using Albumentations library with the following transforms:
 ![After Augmentation](sample_images/cifar10_grid_after_augmentation.png)
 
 ## Training Summary 
-+-------------------+----------------------------------------+
-| Metric | Value |
-+===================+========================================+
-| Total Parameters | 198.2k |
-| Best Test Acc | 85.23% |
-| Final Train Acc | 84.89% |
-| Final Test Acc | 84.92% |
-| Learning Rate | 0.01 |
-| Momentum | 0.9 |
-| Batch Size | 128 |
-| Total Epochs | 15 |
-+-------------------+----------------------------------------+
+| Metric           | Value     |
+|------------------|-----------|
+| Total Parameters  | 198.2k   |
+| Best Test Acc    | 85.23%   |
+| Final Train Acc   | 84.89%   |
+| Final Test Acc    | 84.92%   |
+| Learning Rate     | 0.01     |
+| Momentum          | 0.9      |
+| Batch Size        | 128      |
+| Total Epochs      | 15       |
+
+## Epoch-wise Performance
+|   Epoch | Train Accuracy | Test Accuracy |
+|---------|----------------|----------------|
+|       1 | 10.94%        | 46.94%         |
+|       2 | 13.28%        | 53.69%         |
+|       3 | 12.24%        | 60.35%         |
+|       4 | 13.09%        | 62.43%         |
+|       5 | 13.44%        | 64.00%         |
+|       6 | 13.67%        | 66.21%         |
+|       7 | 14.73%        | 68.00%         |
+|       8 | 15.33%        | 67.73%         |
+|       9 | 16.15%        | 71.76%         |
+|      10 | 16.64%        | 72.31%         |
+|      11 | 16.62%        | 73.75%         |
+|      12 | 16.67%        | 73.99%         |
+|      13 | 16.77%        | 75.33%         |
+|      14 | 17.08%        | 76.57%         |
+
 
 ## Epoch-wise Performance
 ----------------------------------------------------------------------

@@ -1,6 +1,35 @@
 # CIFAR10 Image Classification
-- Conv2d(128, 10, k=1)
-- Log Softmax
+
+## Model Architecture (C1C2C3C40)
+
+The model follows a C1C2C3C40 architecture with the following components:
+
+1. **C1 (Initial Block)**
+   - Conv2d(3, 24, k=3, p=1)
+   - BatchNorm2d + ReLU + Dropout(0.03)
+   - RF: 3x3
+
+2. **C2 (Depthwise Separable Block)**
+   - DepthwiseSeparableConv(24, 48, k=3, s=2)
+   - BatchNorm2d + ReLU + Dropout(0.03)
+   - RF: 7x7
+
+3. **C3 (Dilated Conv Block)**
+   - Conv2d(48, 96, k=3, d=2, p=2)
+   - BatchNorm2d + ReLU + Dropout(0.03)
+   - Conv2d(96, 96, k=3, s=2, p=1)
+   - BatchNorm2d + ReLU + Dropout(0.03)
+   - RF: 15x15
+
+4. **C4 (Strided Conv Block)**
+   - Conv2d(96, 128, k=3, s=2, p=1)
+   - BatchNorm2d + ReLU + Dropout(0.03)
+   - RF: 45x45
+
+5. **Output (0)**
+   - Global Average Pooling
+   - Conv2d(128, 10, k=1)
+   - Log Softmax
 
 ### Key Features
 - No MaxPooling (replaced with strided convolutions)
@@ -14,23 +43,23 @@
 Using Albumentations library with the following transforms:
 
 1. **HorizontalFlip**
-    - Probability: 0.5
+   - Probability: 0.5
 
 2. **ShiftScaleRotate**
-    - Shift Limit: 0.1
-    - Scale Limit: 0.1
-    - Rotate Limit: 15°
-    - Probability: 0.5
+   - Shift Limit: 0.1
+   - Scale Limit: 0.1
+   - Rotate Limit: 15°
+   - Probability: 0.5
 
 3. **CoarseDropout**
-    - Max Holes: 1
-    - Max Height: 16px
-    - Max Width: 16px
-    - Min Holes: 1
-    - Min Height: 16px
-    - Min Width: 16px
-    - Fill Value: Dataset Mean
-    - Probability: 0.5
+   - Max Holes: 1
+   - Max Height: 16px
+   - Max Width: 16px
+   - Min Holes: 1
+   - Min Height: 16px
+   - Min Width: 16px
+   - Fill Value: Dataset Mean
+   - Probability: 0.5
 
 ## Sample Images
 
